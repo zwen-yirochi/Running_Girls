@@ -1,5 +1,4 @@
 @charset "utf-8";
-
 *{
   margin: 0px;
   padding: 0px;
@@ -17,7 +16,21 @@ body{
   padding: 0;
   border: 0;
 }
-video{
-  width: 100%;
-  margin-top: 50%;
+
+.container {
+	display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  height: 100vh;
 }
+.blank {
+  width: 100%;
+}
+
+.item img{
+  width: 100%;  
+}
+
+@media screen and { 
+
+}
+
