@@ -5,13 +5,20 @@
   <meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; user-scalable=no">
   <link rel="stylesheet" href="css/style.css">
   <title>Running Girls</title>
-  <script src="./screen.js" defer></script>
+  <script>
+    function setScreenSize() {
+      let vh = window.innerHeight * 0.01; //window.innerHeight: 현재 창의 뷰포트 높이를 픽셀 단위로 가져옵니다. vh 변수: vh는 뷰포트 높이의 1%를 계산하여 픽셀 값으로 저장합니다.
+      document.documentElement.style.setProperty('--vh', `${vh}px`); //CSS의 :root에 --vh라는 변수를 정의하고, 이를 계산된 vh 값으로 설정합니다.
+      // 처음 로드할 때 한 번 실행
+      setScreenSize();
+      window.addEventListener('resize', setScreenSize); // 화면 크기 변경 시마다 실행
+  }
+  </script>
 </head>
 <body>
   
 
   <div class="container">
-
     <!--BLANK-->
     <span class="blank">
     </span>
@@ -24,13 +31,12 @@
     <!--FOOTER-->
     <div class ="footer">
       
-      <button onclick='alert("clicked!")'>button</button>
+      <button onclick='alert("clicked!")'><img src="img/microphone_105844.png"></button>
       <p class="hints"></p>
       <p class="output"><em>...diagnostic messages</em></p>
     <!--<script src="script.js"></scrip>-->
     </div>
 
   </div>
-  <script>  setScreenSize();</script>
 </body>
 </html>
