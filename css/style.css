@@ -90,7 +90,6 @@ video {
   bottom : 10px;
 }
 
-
 @media only screen and (orientation: landscape) {
   .container {
     grid-template-rows: 
