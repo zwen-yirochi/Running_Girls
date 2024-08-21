@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <link rel="stylesheet" href="css/style.css">
   <title>Running Girls</title>
   <script>
@@ -13,27 +14,10 @@
       setScreenSize();
       window.addEventListener('resize', setScreenSize); // 화면 크기 변경 시마다 실행
     }
-    document.addEventListener('DOMContentLoaded', () => {
-      const images = document.querySelectorAll('.item img');
-      const nextButton = document.getElementById('next-button');
-      let currentIndex = 0;
-
-      function showNextImage() {
-          // 현재 이미지를 숨깁니다.
-        images[currentIndex].classList.remove('active');
-        images[currentIndex].classList.add('hidden');
-        // 다음 이미지를 표시합니다.
-        currentIndex = (currentIndex + 1) % images.length;
-        images[currentIndex].classList.remove('hidden');
-        images[currentIndex].classList.add('active');
-    }
-    nextButton.addEventListener('click', showNextImage);
-});
   </script>
+  <script src="js/script.js" defer></script>
 </head>
 <body>
-  
-
   <div class="container">
     <!--BLANK-->
     <span class="blank">
@@ -50,12 +34,12 @@
     <!--FOOTER-->
     <div class ="footer">
       
-      <button id="next-button"><img src="img/microphone_105844.png"></button>
+      <button id="speech-button"><img src="img/microphone_105844.png"></button>
       <p class="hints"></p>
       <p class="output"><em>...diagnostic messages</em></p>
+      <audio src="audio/020_a__Drum_Loop_172bpm_-_SUNDOWNDB_Zenhiser.wav" autoplay loop></audio>
     <!--<script src="script.js"></scrip>-->
     </div>
-
   </div>
 </body>
 </html>

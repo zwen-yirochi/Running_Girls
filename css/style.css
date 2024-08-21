@@ -85,9 +85,14 @@ video {
   width : 70%;
   height : auto;
 }
-.footer p{
+
+.footer .hints{
   position: absolute;
-  bottom : 10px;
+  bottom : 30px;
+}
+.footer .output{
+  position: absolute;
+  bottom : 5px;
 }
 
 @media only screen and (orientation: landscape) {
