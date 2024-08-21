@@ -59,7 +59,6 @@ video {
 .item img.hidden {
   opacity: 0;
 }
-
 .item img.active {
   opacity: 1;
 }
