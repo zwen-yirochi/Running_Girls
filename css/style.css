@@ -42,15 +42,27 @@ video {
 }
 
 .item{
+  position: relative;
   height: auto;
 }
   
 .item img,vedio{
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height:auto;
   aspect-ratio: 16 / 9;
+  transition: opacity 0.5s ease-in-out;
 }
 
+.item img.hidden {
+  opacity: 0;
+}
+
+.item img.active {
+  opacity: 1;
+}
 .footer {
   display: flex;
   justify-content: center;
