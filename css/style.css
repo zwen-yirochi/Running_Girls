@@ -80,8 +80,40 @@ video {
   opacity: 0.7;
   filter: saturate(0.7);
   position: absolute;
+  z-index : 1;
 }
-.footer img{
+
+.footer button.active:before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 150%;
+  height: 150%;
+  background: rgba(98, 0, 238, 0.4);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  pointer-events: none;
+  z-index: -1;
+  animation: pulse 1.5s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.footer #microphone_icon{
   width : 70%;
   height : auto;
 }
@@ -98,7 +130,7 @@ video {
 @media only screen and (orientation: landscape) {
   .container {
     grid-template-rows: 
-      minmax(0px, calc(var(--vh, 1vh) * 25))  
+      0px
       auto
       minmax(0px,calc(var(--vh, 1vh) * 20));
      height: calc(var(--vh, 1vh) * 100);
@@ -140,7 +172,5 @@ video {
   }
 
   .footer button{
-    display: none;
-
-}
+  }
 }

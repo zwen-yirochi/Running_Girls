@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
   // 이미지 관련 설정
   const images = document.querySelectorAll('.item img'); //음성인식에 성공했을때 바꿀이미지
@@ -73,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 */
   // 사용자가 버튼 클릭 시 음성 인식 시작
   speechButton.onclick = function() {
+    speechButton.classList.add('active');
     recognition.start();
     diagnostic.textContent = 'Listening for an emotion...';
     hints.textContent = '';
@@ -117,23 +117,25 @@ document.addEventListener('DOMContentLoaded', () => {
       default:
         hints.textContent = 'Emotion not recognized.';
     }
-
     console.log('Confidence: ' + event.results[0][0].confidence);
   }
 
   // 음성 인식이 끝났을 때
   recognition.onspeechend = function() {
     recognition.stop();
+    speechButton.classList.remove('active');
   }
 
   // 음성 인식이 감정을 인식하지 못했을 때
   recognition.onnomatch = function(event) {
     diagnostic.textContent = "I didn't recognise that emotion.";
+    speechButton.classList.remove('active');
   }
 
   // 음성 인식 오류 발생 시
   recognition.onerror = function(event) {
     diagnostic.textContent = 'Error occurred in recognition: ' + event.error;
+    speechButton.classList.remove('active');
   }
 });
 
