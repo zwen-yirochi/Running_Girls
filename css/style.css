@@ -46,7 +46,7 @@ video {
   height: auto;
 }
   
-.item img,vedio{
+.item img,video{
   position: absolute;
   top: 0;
   left: 0;
@@ -83,7 +83,7 @@ video {
   z-index : 1;
 }
 
-.footer button.active:before {
+.footer button.active::before {
   content: '';
   position: absolute;
   left: 50%;
@@ -169,8 +169,5 @@ video {
     margin: 0 auto;
     text-align: center;
     padding-top :3em;
-  }
-
-  .footer button{
   }
 }
