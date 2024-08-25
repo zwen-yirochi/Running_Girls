@@ -71,12 +71,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 */
   // 사용자가 버튼 클릭 시 음성 인식 시작
-  speechButton.onclick = function() {
-    speechButton.classList.add('active');
-    recognition.start();
-    diagnostic.textContent = 'Listening for an emotion...';
-    hints.textContent = '';
-    console.log('Ready to receive an emotion.');
+  speechButton.addEventListener('click', startRecognition);
+  speechButton.addEventListener('touchstart', startRecognition);
+  function startRecognition() {
+      speechButton.classList.add('active');
+      recognition.start();
+      diagnostic.textContent = 'Listening for an emotion...';
+      hints.textContent = '';
+      console.log('Ready to receive an emotion.');
   }
 
   // 음성 인식 결과 처리
