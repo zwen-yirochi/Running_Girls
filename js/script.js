@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 음성 인식 설정
   var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
   var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList;
-  var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+  //var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
   var emotions = ['happy', 'sad', 'angry', 'excited', 'bored', 'nervous', 'surprised', 'calm'];
   
