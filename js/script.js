@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   recognition.continuous = false;
-  recognition.lang = 'en-US'; // 필요에 따라 'ko-KR'로 변경 가능
+  recognition.lang = 'en-US';
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
 
