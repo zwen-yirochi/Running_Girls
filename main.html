@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <link rel="stylesheet" href="css/style.css?v=1.0.1">
+  <link rel="stylesheet" href="css/style.css?v=1.0.3">
   <title>Running Girls</title>
   <script>
     function setScreenSize() {
@@ -18,27 +18,70 @@
   <script src="js/script.js" defer></script>
 </head>
 <body>
+  <div id="back"></div>
   <div class="container">
-    <!--BLANK-->
-    <span class="blank">
-    </span>
+    <div class="header">
+      <div class="main_title">
+        <p>Running Girls</p>
+      </div>
+      <div>
+        <button id="mute-button">
+          <img  src="img/volume_off_24dp_5F6368.png" alt="mute" class="active">
+          <img  src="img/volume_up_24dp_5F6368.png" alt="unmute" class="hidden">
+        </button>
+      </div>
+    </div>
 
     <!--IMAGE-->
     <div class="item">
-      <img src="img/content01.gif" alt="Image01" class="active">
-      <img src="img/content02_test.jpg" alt="Image02" class="hidden">
-      <img src="img/content03_test.jpg" alt="Image03" class="hidden">
-      <button id="mute-button"></button>
+      <div class="article">
+        <div class="init">
+          <p>
+            이 작품은 관람자의 참여로 완성되는<br>
+            반응형 전시입니다.<br>
+            최상의 전시 경험을 위해 마이크 접근 권한과<br>
+            사운드 재생 권한을 허용해 주세요.<br><br>
+            This work is a reactive exhibition<br>
+            completed with the participation of viewers.<br>
+            Please allow microphone and soun access.<br>
+            for your best viewing experience.
+          </p>
+          <p>
+            여러분의 감정을 담아 전해 주며<br>
+            주인공 환희와 함께 달려주세요!<br><br>
+            Tell us about your feelings watching<br>
+            the main charactor, Hwanhee run!
+          </p>
+        </div>
+      </div>
+      
+      <div class="content">
+        <div class="un_init">
+          <img src="img/!!런닝걸즈기본투명.GIF" alt="Image01" class="active">
+          <img src="img/content02_test.jpg" alt="Image02" class="hidden">
+          <img src="img/content03_test.jpg" alt="Image03" class="hidden">
+        </div>
+      </div>
     </div>
 
     <!--FOOTER-->
     <div class ="footer">
-      
-      <button id="speech-button"><img id="microphone_icon"src="img/microphone_105844.png"></button>
-      <p class="hints"></p>
-      <p class="output"><em>...diagnostic messages</em></p>
+      <div class="speech-button">
+        <button id="speech-button">
+          <p class ="init">RUN!</p>
+          <img class="un_init" id="microphone_icon" src="img/microphone_105844.png">
+        </button>
+      </div>
+      <div class="result">
+        <p class="hints"></p>
+        <p class="output"><em>...diagnostic messages</em></p>
+      </div>
       <!--<audio src="audio/020_a__Drum_Loop_172bpm_-_SUNDOWNDB_Zenhiser.wav" autoplay loop muted></audio>-->
-    <!--<script src="script.js"></scrip>-->
+
+
+      <script>
+
+      </script>
     </div>
   </div>
 </body>

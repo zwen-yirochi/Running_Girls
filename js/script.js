@@ -1,10 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // 이미지 관련 설정
+
+  //==================================//
+  // 초기 설정
+  // 이미지 관련
   const images = document.querySelectorAll('.item img'); //음성인식에 성공했을때 바꿀이미지
   const speechButton = document.getElementById('speech-button'); //버튼을 speech-button 으로 설정
   const diagnostic = document.querySelector('.output');
   const hints = document.querySelector('.hints');
-  //const imageElement = document.querySelector('.item img');
+
+  const inits = document.querySelectorAll('.init');
+  const un_inits = document.querySelectorAll('.un_init');
+  const back = document.getElementById('back');
+  function initialize() {
+    inits.forEach(function(init) {
+      init.classList.add('un_init');
+      init.classList.remove('init');
+    });
+    un_inits.forEach(function(un_init) {
+      un_init.classList.remove('un_init');
+    });
+    var imageUrl = "../img/background_img/background_image_phase_01.jpeg";
+    back.style.backgroundImage = "url('" + imageUrl + "')";
+    back.style.opacity = 0.7;
+    // 클릭 이벤트 리스너 제거
+    speechButton.removeEventListener('click', initialize);
+  }
+  // 클릭 이벤트 리스너 추가
+  speechButton.addEventListener('click', initialize);
+
+  //========================//
+  // 배경 설정 
+  let currentPhase = 1;
+  function showNextBackground(){
+    const imageUrl ="../img/background_img/background_image_phase_0"
+    currentPhase++;
+    document.getElementById('back').style.backgroundImage = "url('" + imageUrl + currentPhase + ".jpeg" + "')";
+  }
+
 
   let currentIndex = 0;
   function showNextImage() {
@@ -87,8 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
     diagnostic.textContent = 'Emotion recognized: ' + emotion + '.';
     
     // 감정에 따라 이미지 변경
-    //changeImage(emotion);
-    showNextImage();
+    //showNextImage();
+    showNextBackground();
 
     // 감정 상태에 따른 힌트 표시
     switch (emotion.toLowerCase()) {

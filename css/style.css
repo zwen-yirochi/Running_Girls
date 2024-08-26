@@ -17,74 +17,154 @@ body{
   padding: 0;
   border: 0;
   background-color :#fbfbfc;
+  
 }
+
+#back {
+  position: absolute; /* 또는 relative, fixed 등으로 설정 */
+  width: 100%;
+  height: 100vh; /* 전체 화면을 채우도록 설정 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0; /* 초기 상태에서 보이지 않게 설정 */
+  transition: opacity 2s ease-in-out, background-image 2s ease-in-out;
+  z-index:-1;
+}
+
 img,
 picture,
 video {
   max-width: 100%;
 }
-.container, .item, .footer{
-  width:100%;
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
+//-------------------------------------------------------//
+
+.container, .header, .item, .footer{
+  width:100%;
+  z-index:1;
+}
 /*모바일 퍼스트 스타일*/
 .container {
 	display: grid;
   grid-template-rows: 
-    minmax(0px, calc(var(--vh, 1vh) * 25))  
+    minmax(0px, 1fr)  
     auto
-    calc(var(--vh, 1vh)*40);
+    minmax(200px,2fr);
   height: calc(var(--vh, 1vh) * 100);
 }
-  
-.blank {
-  height: auto;
+//------------------------------------------------------//
+.header {
 }
 
-.item{
-  position: relative;
-  height: auto;
+.header .main_title{
+  margin-top:calc(var(--vh, 1vh) * 4);
+  padding:calc(var(--vh, 1vh) * 6);
+  text-align:center;
+  height:100%;
 }
-  
-.item img,video{
+
+.header p{
+  font-family: S-CoreDream-3Light;
+  font-size: calc(var(--vh, 1vh) * 4);
+}
+
+.header button{
+  flex-direction: column;
+  width:60px;
+  height: 60px;
+  background: transparent;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height:auto;
+  right: 0px;
+  border: 0;
+  padding: 0 !important;
+  pointer-events: auto;
+}
+.header button img{
+  width: 50%;
+  height:50%;
+  position: absolute;
+  bottom:0px;
+  left:0px;
+}
+.header button p.hidden{
+  display:none;
+}
+
+//----------------------------------------------------------//
+
+.item{
+  padding-bottom: 2em;
+}
+
+.item .article div{
+  max-height:100%;
+  font-family: S-CoreDream-3Light;
+  font-size: calc(var(--vh, 1vh) * 1.7);
+  text-align:center;
+}
+
+.item .article div.un_init{
+  opacity: 0;
+  max-height: 0px;
+  overflow: hidden;
+  transition: opacity 2s ease, height 2s ease;
+}
+.item  p:nth-of-type(1){
+  color :#999;
+  padding: calc(var(--vh, 1vh) * 3);
+}
+.item .init p:nth-of-type(2){
+  color :#111;
+}
+
+.item .content{
+  position: relative;
+}
+
+
+
+.item img,video{
+  position: relative;
   aspect-ratio: 16 / 9;
   transition: opacity 0.5s ease-in-out;
 }
-
-.item button{
-  width: 30px;
-  height: 30px;
-  background-color: #999;
-  border: none;
-  border-radius: 50%;
-  position: absolute;
-  right: 50px;
-  z-index : 10;
+.item .content .un_init{
+  opacity: 0;
+  height: 0;
+  padding-top:0px;
+  overflow: hidden;
 }
 
 .item img.hidden {
-  opacity: 0;
+  display:none;
 }
 .item img.active {
   opacity: 1;
 }
 
-
+//---------------------------------------------------//
 .footer {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  position: relative;
-  padding-top :calc(var(--vh, 1vh) * 10);
+  width: 100%;
+  margin: 0 auto; 
 }
 
-.footer button{
+.footer .speech-button{
+  text-align: center;
+  padding-top:calc(var(--vh, 1vh) * 10);
+  padding-bottom:calc(var(--vh, 1vh) * 10);
+}
+.footer .speech-button button{
   width: max(30px, calc(var(--vh, 1vh) * 9));
   height: max(30px, calc(var(--vh, 1vh) * 9));
   background-color: #fff;
@@ -92,8 +172,46 @@ video {
   box-shadow: 5px 10px 20px rgba(200, 200, 200, 0.5);
   opacity: 0.7;
   filter: saturate(0.7);
-  position: absolute;
   z-index : 10;
+}
+
+.footer .speech-button p{
+  height:100%;
+  padding-top:33%;
+}
+
+.footer .speech-button p.un_init{
+  opacity: 0;
+  height: 0;
+  padding-top:0px;
+  overflow: hidden;
+  transition: opacity 2s ease, height 2s ease;
+}
+
+.footer .speech-button img{
+  width : 70%;
+  height : auto;
+}
+
+.footer .speech-button img.un_init{
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+
+
+
+.footer .result{
+  text-align: center;
+}
+
+.footer .result p.hints{
+  bottom : 30px;
+}
+.footer .result p.output{
+  bottom : 5px;
+  font-size: calc(var(--vh, 1vh) * 3);
 }
 
 .footer button.active::before {
@@ -126,19 +244,7 @@ video {
   }
 }
 
-.footer #microphone_icon{
-  width : 70%;
-  height : auto;
-}
 
-.footer .hints{
-  position: absolute;
-  bottom : 30px;
-}
-.footer .output{
-  position: absolute;
-  bottom : 5px;
-}
 
 @media only screen and (orientation: landscape) {
   .container {
