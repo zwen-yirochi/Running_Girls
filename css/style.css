@@ -28,7 +28,7 @@ body{
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0; /* 초기 상태에서 보이지 않게 설정 */
-  transition: opacity 2s ease-in-out, background-image 2s ease-in-out;
+  transition: opacity 0.7s ease-in-out, background-image 1s ease-in-out;
   z-index:-1;
 }
 
@@ -127,9 +127,13 @@ video {
 .item .content{
   position: relative;
 }
-
-
-
+.overlay-image { 
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* 클릭이 아래 이미지에 전달되도록 설정 */
+  display:none;
+}
 .item img,video{
   position: relative;
   aspect-ratio: 16 / 9;

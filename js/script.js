@@ -1,57 +1,88 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // 수치 설정
+  const PHASE_DEPTH=1;
 
-  //==================================//
   // 초기 설정
-  // 이미지 관련
   const images = document.querySelectorAll('.item img'); //음성인식에 성공했을때 바꿀이미지
-  const speechButton = document.getElementById('speech-button'); //버튼을 speech-button 으로 설정
   const diagnostic = document.querySelector('.output');
   const hints = document.querySelector('.hints');
-
+  const imageElement = document.getElementById('emotion-image');
+  const imageOverlay= document.getElementById('overlay-image');
+  const imageOverlay2= document.getElementById('overlay-image2');
+  const speechButton = document.getElementById('speech-button');
   const inits = document.querySelectorAll('.init');
   const un_inits = document.querySelectorAll('.un_init');
   const back = document.getElementById('back');
+
+  //초기화 함수 //
+  //==============================================//
   function initialize() {
-    inits.forEach(function(init) {
+    // 초기 상태 설정
+    inits.forEach(init => {
       init.classList.add('un_init');
       init.classList.remove('init');
     });
-    un_inits.forEach(function(un_init) {
+    un_inits.forEach(un_init => {
       un_init.classList.remove('un_init');
     });
+
+    // 경로 설정
     const baseUrl = window.location.origin;
-
-    // GitHub Pages 환경에서 사용하는 리포지토리 이름
     const repositoryName = "/Running_Girls";
-    
-    // 로컬인지 GitHub Pages인지 확인하여 경로 설정
     const imageUrl = baseUrl.includes('github.io')
-        ? `${baseUrl}${repositoryName}/img/background_img/background_image_phase_01.jpeg`
-        : "../img/background_img/background_image_phase_01.jpeg";  
+      ? `${baseUrl}${repositoryName}/img/background_img/background_image_phase_01.jpeg`
+      : "../img/background_img/background_image_phase_01.jpeg";
 
-    //var imageUrl = "/Running_Girls/img/background_img/background_image_phase_01.jpeg";
-    back.style.backgroundImage = "url('" + imageUrl + "')";
+    // 배경 이미지와 투명도 설정
+    back.style.backgroundImage = `url('${imageUrl}')`;
+    back.style.transition = "opacity 1s ease";  // 트랜지션 설정
     back.style.opacity = 0.7;
+
     // 클릭 이벤트 리스너 제거
     speechButton.removeEventListener('click', initialize);
   }
+  //==============================================//
+
+
   // 클릭 이벤트 리스너 추가
   speechButton.addEventListener('click', initialize);
 
-  //========================//
-  // 배경 설정 
-  let currentPhase = 1;
-  function showNextBackground(){
-    const baseUrl = window.location.origin;
-    // GitHub Pages 환경에서 사용하는 리포지토리 이름
-    const repositoryName = "/Running_Girls";
-    const imageUrlPart = baseUrl.includes('github.io')
-    ? `${baseUrl}${repositoryName}/img/background_img/background_image_phase_0`
-    : "../img/background_img/background_image_phase_0";
-    currentPhase++;
-    document.getElementById('back').style.backgroundImage = "url('" + imageUrlPart + currentPhase + ".jpeg" + "')";
-  }
 
+  // 배경 설정//
+  //==============================================//
+  let currentPhase = 1;
+  function showNextBackground() {
+    // 배경 이미지 페이드 아웃
+    back.style.opacity = 0;
+    
+    // 배경 이미지 전환과 오버레이 이미지 업데이트
+    setTimeout(() => {
+      currentPhase++;
+      const baseUrl = window.location.origin;
+      const repositoryName = "/Running_Girls";
+      const imageUrlPart = baseUrl.includes('github.io')
+        ? `${baseUrl}${repositoryName}/img/background_img/background_image_phase_0`
+        : "../img/background_img/background_image_phase_0";
+  
+      // 현재 Phase를 설정하고 배경 이미지 업데이트
+      back.style.backgroundImage = "url('" + imageUrlPart + currentPhase + ".jpeg')";
+      
+      // Phase가 5일 때 오버레이 이미지 표시
+      if (currentPhase === 5) {
+        imageOverlay2.src = '../img/나비_투명.GIF'; // 오버레이 이미지 설정
+        imageOverlay2.style.display = 'block'; // 오버레이 이미지 표시
+      } else {
+        imageOverlay2.style.display = 'none'; // 오버레이 이미지 숨기기
+      }
+  
+      // 새로운 배경 이미지가 적용된 후 페이드 인
+      back.style.opacity = 0.7;
+  
+      // Phase 증가
+      
+    },1000);
+  }
+  //==============================================//
 
   let currentIndex = 0;
   function showNextImage() {
@@ -84,39 +115,113 @@ document.addEventListener('DOMContentLoaded', () => {
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
 
-  /*
+
   // 감정에 따라 상호작용 구현
+  var happy_count=0;
+  var sad_count=0;
+  var mad_count =0;
   const changeImage = (emotion) => {
+    let originalSrc = 'img/!!런닝걸즈기본투명.GIF'; // 기본 이미지 경로
+    let newSrc = ''; // 변경할 이미지 경로
+
     switch (emotion.toLowerCase()) {
       case 'happy':
-        imageElement.src = 'img/happy.jpg'; // 실제 이미지 경로로 변경
+        if(happy_count%3==0){
+          newSrc = '../img/emotion/happy_01.GIF';
+        setTimeout(() => {
+          imageElement.src = newSrc;
+        }, 500);
+        setTimeout(() => {
+          imageElement.src = originalSrc;
+      }, 3000);
+        }
+        else if(happy_count%3==1){
+          newSrc = '../img/emotion/happy_02.GIF';
+        setTimeout(() => {
+          imageElement.src = newSrc;
+        }, 500);
+        setTimeout(() => {
+          imageElement.src = originalSrc; 
+      }, 1000);
+        }
+        else{
+        setTimeout(() => {
+          imageOverlay.src = '../img/emotion/happy_03.GIF'
+          imageOverlay.style.display= 'block';
+        }, 500);
+        setTimeout(() => {
+          imageOverlay.style.display= 'none';
+      }, 3000);
+        }
+        happy_count++;
         break;
+        //===========================================//
       case 'sad':
-        imageElement.src = 'img/sad.jpg'; // 실제 이미지 경로로 변경
+        if(sad_count%3==0){
+          newSrc = '../img/emotion/sad_01.GIF';
+        setTimeout(() => {
+          imageElement.src = newSrc;
+        }, 500);
+        setTimeout(() => {
+          imageElement.src = originalSrc;
+      }, 3000);
+        }
+        else if(sad_count%3==1){
+          newSrc = '../img/emotion/sad_02.GIF';
+        setTimeout(() => {
+          imageElement.src = newSrc;
+        }, 500);
+        setTimeout(() => {
+          imageElement.src = originalSrc; 
+      }, 3500);
+        }
+        else{
+        setTimeout(() => {
+          imageOverlay.src = '../img/emotion/sad_03.GIF'
+          imageOverlay.style.display= 'block';
+        }, 500);
+        setTimeout(() => {
+          imageOverlay.style.display= 'none';
+      }, 3500);
+        }
+        sad_count++;
         break;
-      case 'angry':
-        imageElement.src = 'img/angry.jpg'; // 실제 이미지 경로로 변경
+      case 'mad':
+        if(mad_count%2==0){
+          newSrc = '../img/emotion/mad_01.GIF';
+        setTimeout(() => {
+          imageElement.src = newSrc;
+        }, 500);
+        setTimeout(() => {
+          imageElement.src = originalSrc; 
+      }, 3500);
+        }
+        else{
+        setTimeout(() => {
+          imageOverlay.src = '../img/emotion/mad_02.GIF'
+          imageOverlay.style.display= 'block';
+        }, 500);
+        setTimeout(() => {
+          imageOverlay.style.display= 'none';
+        }, 3500);
+        newSrc = '../img/emotion/mad_01.GIF';
+        }
+        mad_count++;
         break;
-      case 'excited':
-        imageElement.src = 'img/excited.jpg'; // 실제 이미지 경로로 변경
-        break;
-      case 'bored':
-        imageElement.src = 'img/bored.jpg'; // 실제 이미지 경로로 변경
-        break;
-      case 'nervous':
-        imageElement.src = 'img/nervous.jpg'; // 실제 이미지 경로로 변경
-        break;
-      case 'surprised':
-        imageElement.src = 'img/surprised.jpg'; // 실제 이미지 경로로 변경
-        break;
-      case 'calm':
-        imageElement.src = 'img/calm.jpg'; // 실제 이미지 경로로 변경
+      case 'cheer':
+        newSrc = '../img/emotion/cheer_01.GIF';
+        setTimeout(() => {
+          imageElement.src = newSrc;
+        }, 500);
+        setTimeout(() => {
+          imageElement.src = originalSrc;
+      }, 3000);
         break;
       default:
-        imageElement.src = 'img/default.jpg'; // 기본 이미지로 변경
+        newSrc = originalSrc;
     }
   }
-*/
+
   // 사용자가 버튼 클릭 시 음성 인식 시작
   speechButton.addEventListener('click', startRecognition);
   speechButton.addEventListener('touchstart', startRecognition);
@@ -129,13 +234,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 음성 인식 결과 처리
+  var count = 0;
   recognition.onresult = function(event) {
     var emotion = event.results[0][0].transcript;
+    count++;
+    if(count%PHASE_DEPTH ==0){
+      showNextBackground();
+    }
+    changeImage(emotion);
     diagnostic.textContent = 'Emotion recognized: ' + emotion + '.';
+    
     
     // 감정에 따라 이미지 변경
     //showNextImage();
-    showNextBackground();
+    
+
 
     // 감정 상태에 따른 힌트 표시
     switch (emotion.toLowerCase()) {
