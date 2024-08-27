@@ -44,6 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 배경 설정 
   let currentPhase = 1;
   function showNextBackground(){
+    const baseUrl = window.location.origin;
+
+    // GitHub Pages 환경에서 사용하는 리포지토리 이름
+    const repositoryName = "/Running_Girls";
     const imageUrlPart = baseUrl.includes('github.io')
     ? `${baseUrl}${repositoryName}/img/background_img/background_image_phase_0`
     : "../img/background_img/background_image_phase_0";
