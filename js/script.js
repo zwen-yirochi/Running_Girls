@@ -29,8 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ? `${baseUrl}${repositoryName}/img/background_img/background_image_phase_01.jpeg`
         : "../img/background_img/background_image_phase_01.jpeg";  
 
-
-
     //var imageUrl = "/Running_Girls/img/background_img/background_image_phase_01.jpeg";
     back.style.backgroundImage = "url('" + imageUrl + "')";
     back.style.opacity = 0.7;
@@ -45,14 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPhase = 1;
   function showNextBackground(){
     const baseUrl = window.location.origin;
-
     // GitHub Pages 환경에서 사용하는 리포지토리 이름
     const repositoryName = "/Running_Girls";
     const imageUrlPart = baseUrl.includes('github.io')
     ? `${baseUrl}${repositoryName}/img/background_img/background_image_phase_0`
     : "../img/background_img/background_image_phase_0";
     currentPhase++;
-    document.getElementById('back').style.backgroundImage = "url('" + imageUrl + currentPhase + ".jpeg" + "')";
+    document.getElementById('back').style.backgroundImage = "url('" + imageUrlPart + currentPhase + ".jpeg" + "')";
   }
 
 
