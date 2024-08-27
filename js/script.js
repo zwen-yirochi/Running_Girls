@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // 수치 설정
-  const PHASE_DEPTH=1;
+  const PHASE_DEPTH=4;
 
   // 초기 설정
   const images = document.querySelectorAll('.item img'); //음성인식에 성공했을때 바꿀이미지
@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const un_inits = document.querySelectorAll('.un_init');
   const back = document.getElementById('back');
 
+  const baseUrl = window.location.origin;
+  const repositoryName = "/Running_Girls";
   //초기화 함수 //
   //==============================================//
   function initialize() {
@@ -27,8 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 경로 설정
-    const baseUrl = window.location.origin;
-    const repositoryName = "/Running_Girls";
+
     const imageUrl = baseUrl.includes('github.io')
       ? `${baseUrl}${repositoryName}/img/background_img/background_image_phase_01.jpeg`
       : "../img/background_img/background_image_phase_01.jpeg";
@@ -77,13 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
       // 새로운 배경 이미지가 적용된 후 페이드 인
       back.style.opacity = 0.7;
-  
-      // Phase 증가
-      
     },1000);
   }
   //==============================================//
-
   let currentIndex = 0;
   function showNextImage() {
     // 현재 이미지를 숨깁니다.
@@ -120,14 +117,29 @@ document.addEventListener('DOMContentLoaded', () => {
   var happy_count=0;
   var sad_count=0;
   var mad_count =0;
+  var cheer_count =0;
+
+  const isGitHubPages = baseUrl.includes('github.io');
+  const imageBasePath = isGitHubPages ? `${baseUrl}${repositoryName}/img/emotion/` : "../img/emotion/";
   const changeImage = (emotion) => {
     let originalSrc = 'img/!!런닝걸즈기본투명.GIF'; // 기본 이미지 경로
     let newSrc = ''; // 변경할 이미지 경로
 
+    const getEmotionImagePath = (count, emotion) => {
+      let imagePath='';
+      if(emotion.toLowerCase() === 'mad'){
+         imagePath = `${emotion}_0${(count % 2) + 1}.GIF`;
+      }
+      else{
+        imagePath = `${emotion}_0${(count % 3) + 1}.GIF`;
+      }
+      return imageBasePath + imagePath;
+    }
+
     switch (emotion.toLowerCase()) {
       case 'happy':
         if(happy_count%3==0){
-          newSrc = '../img/emotion/happy_01.GIF';
+          newSrc= getEmotionImagePath(happy_count,'happy');
         setTimeout(() => {
           imageElement.src = newSrc;
         }, 500);
@@ -136,29 +148,29 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 3000);
         }
         else if(happy_count%3==1){
-          newSrc = '../img/emotion/happy_02.GIF';
+          newSrc = getEmotionImagePath(happy_count, 'happy');
         setTimeout(() => {
           imageElement.src = newSrc;
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc; 
-      }, 1000);
+        }, 1000);
         }
         else{
-        setTimeout(() => {
-          imageOverlay.src = '../img/emotion/happy_03.GIF'
-          imageOverlay.style.display= 'block';
-        }, 500);
-        setTimeout(() => {
-          imageOverlay.style.display= 'none';
-      }, 3000);
+          newSrc = getEmotionImagePath(happy_count, 'happy');
+          setTimeout(() => {
+            imageOverlay.src = newSrc
+            imageOverlay.style.display= 'block';
+          }, 500);
+          setTimeout(() => {
+            imageOverlay.style.display= 'none';
+          }, 3000);
         }
         happy_count++;
         break;
-        //===========================================//
       case 'sad':
         if(sad_count%3==0){
-          newSrc = '../img/emotion/sad_01.GIF';
+          newSrc = getEmotionImagePath(sad_count, 'sad');
         setTimeout(() => {
           imageElement.src = newSrc;
         }, 500);
@@ -167,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 3000);
         }
         else if(sad_count%3==1){
-          newSrc = '../img/emotion/sad_02.GIF';
+          newSrc = getEmotionImagePath(sad_count, 'sad');
         setTimeout(() => {
           imageElement.src = newSrc;
         }, 500);
@@ -176,8 +188,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 3500);
         }
         else{
+          newSrc=getEmotionImagePath(sad_count, 'sad');
         setTimeout(() => {
-          imageOverlay.src = '../img/emotion/sad_03.GIF'
+          imageOverlay.src = newSrc;
           imageOverlay.style.display= 'block';
         }, 500);
         setTimeout(() => {
@@ -188,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       case 'mad':
         if(mad_count%2==0){
-          newSrc = '../img/emotion/mad_01.GIF';
+          newSrc = getEmotionImagePath(mad_count, 'mad');
         setTimeout(() => {
           imageElement.src = newSrc;
         }, 500);
@@ -198,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         else{
         setTimeout(() => {
-          imageOverlay.src = '../img/emotion/mad_02.GIF'
+          imageOverlay.src = getEmotionImagePath(mad_count, 'mad');
           imageOverlay.style.display= 'block';
         }, 500);
         setTimeout(() => {
@@ -209,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mad_count++;
         break;
       case 'cheer':
-        newSrc = '../img/emotion/cheer_01.GIF';
+        newSrc = getEmotionImagePath(cheer_count, 'cheer');
         setTimeout(() => {
           imageElement.src = newSrc;
         }, 500);
