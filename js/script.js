@@ -19,7 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
     un_inits.forEach(function(un_init) {
       un_init.classList.remove('un_init');
     });
-    var imageUrl = "../img/background_img/background_image_phase_01.jpeg";
+    const baseUrl = window.location.origin;
+
+    // GitHub Pages 환경에서 사용하는 리포지토리 이름
+    const repositoryName = "/Running_Girls";
+    
+    // 로컬인지 GitHub Pages인지 확인하여 경로 설정
+    const imageUrl = baseUrl.includes('github.io')
+        ? `${baseUrl}${repositoryName}/img/background_img/background_image_phase_01.jpeg`
+        : "../img/background_img/background_image_phase_01.jpeg";  
+
+
+
+    //var imageUrl = "/Running_Girls/img/background_img/background_image_phase_01.jpeg";
     back.style.backgroundImage = "url('" + imageUrl + "')";
     back.style.opacity = 0.7;
     // 클릭 이벤트 리스너 제거
@@ -32,7 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 배경 설정 
   let currentPhase = 1;
   function showNextBackground(){
-    const imageUrl ="../img/background_img/background_image_phase_0"
+    const imageUrlPart = baseUrl.includes('github.io')
+    ? `${baseUrl}${repositoryName}/img/background_img/background_image_phase_0`
+    : "../img/background_img/background_image_phase_0";
     currentPhase++;
     document.getElementById('back').style.backgroundImage = "url('" + imageUrl + currentPhase + ".jpeg" + "')";
   }
