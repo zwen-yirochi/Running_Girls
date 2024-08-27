@@ -41,10 +41,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 클릭 이벤트 리스너 제거
     speechButton.removeEventListener('click', initialize);
+    const preloadImages = (images) => {
+      images.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    };
+    
+    const isGitHubPages = baseUrl.includes('github.io');
+    const imageBasePath = isGitHubPages ? `${baseUrl}${repositoryName}/img/emotion/` : "../img/emotion/";
+    const imagePaths = [
+      `${imageBasePath}happy_01.GIF`,
+      `${imageBasePath}happy_02.GIF`,
+      `${imageBasePath}happy_03.GIF`,
+      `${imageBasePath}sad_01.GIF`,
+      `${imageBasePath}sad_02.GIF`,
+      `${imageBasePath}sad_03.GIF`,
+      `${imageBasePath}mad_01.GIF`,
+      `${imageBasePath}mad_02.GIF`,
+      `${imageBasePath}cheer_01.GIF`
+    ];
+    const imageBasePath2 = isGitHubPages ? `${baseUrl}${repositoryName}/img/background_img/` : "../img/background_img/";
+    const imagePaths2 = [
+      `${imgagePaths2}background_image_phase_01.jpeg`
+      `${imgagePaths2}background_image_phase_02.jpeg`
+      `${imgagePaths2}background_image_phase_03.jpeg`
+      `${imgagePaths2}background_image_phase_04.jpeg`
+      `${imgagePaths2}background_image_phase_05.jpeg`
+    ];
+    // 사전 로드 호출
+    preloadImages(imagePaths);
   }
   //==============================================//
-
-
   // 클릭 이벤트 리스너 추가
   speechButton.addEventListener('click', initialize);
 
