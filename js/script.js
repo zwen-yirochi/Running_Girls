@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 경로 설정
-
     const imageUrl = baseUrl.includes('github.io')
       ? `${baseUrl}${repositoryName}/img/background_img/background_image_phase_01.jpeg`
       : "../img/background_img/background_image_phase_01.jpeg";
@@ -41,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 클릭 이벤트 리스너 제거
     speechButton.removeEventListener('click', initialize);
+    recognition.stop();
+    speechButton.classList.remove('active');
+
     const preloadImages = (images) => {
       images.forEach((src) => {
         const img = new Image();
@@ -63,19 +65,19 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     const imageBasePath2 = isGitHubPages ? `${baseUrl}${repositoryName}/img/background_img/` : "../img/background_img/";
     const imagePaths2 = [
-      `${imgagePaths2}background_image_phase_01.jpeg`
-      `${imgagePaths2}background_image_phase_02.jpeg`
-      `${imgagePaths2}background_image_phase_03.jpeg`
-      `${imgagePaths2}background_image_phase_04.jpeg`
-      `${imgagePaths2}background_image_phase_05.jpeg`
+      `${imageBasePath2}background_image_phase_01.jpeg`
+      `${imageBasePath2}background_image_phase_02.jpeg`
+      `${imageBasePath2}background_image_phase_03.jpeg`
+      `${imageBasePath2}background_image_phase_04.jpeg`
+      `${imageBasePath2}background_image_phase_05.jpeg`
     ];
     // 사전 로드 호출
     preloadImages(imagePaths);
+    preloadImages(imagePaths2);
   }
   //==============================================//
   // 클릭 이벤트 리스너 추가
   speechButton.addEventListener('click', initialize);
-
 
   // 배경 설정//
   //==============================================//
@@ -125,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList;
   //var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-  var emotions = ['happy', 'sad', 'angry', 'excited', 'bored', 'nervous', 'surprised', 'calm'];
+  var emotions = ['happy', 'sad', 'angry', 'mad', 'excited', 'bored', 'nervous', 'surprised', 'calm'];
   
   var recognition = new SpeechRecognition();
   if (SpeechGrammarList) {
@@ -152,7 +154,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const changeImage = (emotion) => {
     let originalSrc = 'img/!!런닝걸즈기본투명.GIF'; // 기본 이미지 경로
     let newSrc = ''; // 변경할 이미지 경로
+    //감정 모아주는 로직 구현
 
+    //==================//
     const getEmotionImagePath = (count, emotion) => {
       let imagePath='';
       if(emotion.toLowerCase() === 'mad'){
@@ -173,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc;
-      }, 3000);
+      }, 7500);
         }
         else if(happy_count%3==1){
           newSrc = getEmotionImagePath(happy_count, 'happy');
@@ -182,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc; 
-        }, 1000);
+        }, 3500);
         }
         else{
           newSrc = getEmotionImagePath(happy_count, 'happy');
@@ -192,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 500);
           setTimeout(() => {
             imageOverlay.style.display= 'none';
-          }, 3000);
+          }, 7500);
         }
         happy_count++;
         break;
@@ -204,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc;
-      }, 3000);
+      }, 7500);
         }
         else if(sad_count%3==1){
           newSrc = getEmotionImagePath(sad_count, 'sad');
@@ -213,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc; 
-      }, 3500);
+      }, 7500);
         }
         else{
           newSrc=getEmotionImagePath(sad_count, 'sad');
@@ -223,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageOverlay.style.display= 'none';
-      }, 3500);
+      }, 7500);
         }
         sad_count++;
         break;
@@ -235,16 +239,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc; 
-      }, 3500);
+      }, 7500);
         }
         else{
+          newSrc= getEmotionImagePath(mad_count, 'mad');
         setTimeout(() => {
-          imageOverlay.src = getEmotionImagePath(mad_count, 'mad');
+          imageOverlay.src = newSrc;
           imageOverlay.style.display= 'block';
         }, 500);
         setTimeout(() => {
           imageOverlay.style.display= 'none';
-        }, 3500);
+        }, 7500);
         newSrc = '../img/emotion/mad_01.GIF';
         }
         mad_count++;
@@ -256,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc;
-      }, 3000);
+      }, 7500);
         break;
       default:
         newSrc = originalSrc;

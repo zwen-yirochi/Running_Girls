@@ -31,6 +31,12 @@ body{
   transition: opacity 0.7s ease-in-out, background-image 1s ease-in-out;
   z-index:-1;
 }
+#ground { 
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  pointer-events: none; 
+}
 
 img,
 picture,
@@ -183,6 +189,7 @@ video {
 .footer .speech-button p{
   height:100%;
   padding-top:33%;
+  font-size:calc(var(--vh, 1vh) * 2);
 }
 
 .footer .speech-button p.un_init{

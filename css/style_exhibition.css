@@ -1,0 +1,129 @@
+@charset "utf-8";
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+ul,ol{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+body{
+  overflow: hidden;
+  width: 100%; 
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color :#fbfbfc;
+  
+}
+
+#back {
+  position: absolute; /* 또는 relative, fixed 등으로 설정 */
+  width: 100%;
+  height: 100vh; /* 전체 화면을 채우도록 설정 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+  transition: opacity 0.7s ease-in-out, background-image 1s ease-in-out;
+  z-index:-1;
+}
+#ground { 
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  pointer-events: none; 
+}
+
+img,
+picture,
+video {
+  max-width: 100%;
+}
+
+@font-face {
+  font-family: 'Meongi-W';
+  src: url('../assets/fonts/Cafe24Meongi-W-v1.0.woff') format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+//-------------------------------------------------------//
+
+.container, .header, .item, .footer{
+  width:100%;
+  z-index:1;
+}
+/*모바일 퍼스트 스타일*/
+.container {
+	display: grid;
+  grid-template-rows: 
+    minmax(0px, 1fr)  
+    auto
+    minmax(200px,2fr);
+  height: calc(var(--vh, 1vh) * 100);
+}
+//------------------------------------------------------//
+.header {
+}
+
+.header .main_title{
+  margin-top:calc(var(--vh, 1vh) * 4);
+  padding:calc(var(--vh, 1vh) * 6);
+  text-align:center;
+  height:100%;
+}
+
+.header p{
+  font-family: 'Meongi-W';
+  font-size: calc(var(--vh, 1vh) * 4);
+}
+
+//----------------------------------------------------------//
+
+.item{
+  padding-bottom: 2em;
+}
+.item .content{
+  position: relative;
+}
+.overlay-image { 
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* 클릭이 아래 이미지에 전달되도록 설정 */
+  display:none;
+}
+.item img,video{
+  position: relative;
+  aspect-ratio: 16 / 9;
+  transition: opacity 0.5s ease-in-out;
+}
+.item img.active {
+  opacity: 1;
+}
+
+//---------------------------------------------------//
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto; 
+}
+
+.footer .qr_container{
+  position:relative;
+  align-items: center;
+  height : 100%;
+}
+.footer img{
+  position: absolute;
+  width: 20%;
+  top:30%;
+  left : 40%;
+}
