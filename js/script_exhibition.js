@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   // 수치 설정
-  const PHASE_DEPTH=1;
+  const PHASE_DEPTH=4;
 
   // 초기 설정
+  const test_button = document.getElementById('test_button');
+
+
   const imageElement = document.getElementById('emotion-image');
   const imageOverlay= document.getElementById('overlay-image');
   const imageOverlay2= document.getElementById('overlay-image2');
@@ -20,7 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
   back.style.transition = "opacity 1s ease";  // 트랜지션 설정
   back.style.opacity = 0.7;
 
-
+  const preloadImages = (images) => {
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  };
   // 사전 로드 호출
   var isGitHubPages = baseUrl.includes('github.io');
   var imageBasePath = isGitHubPages ? `${baseUrl}${repositoryName}/img/emotion/` : "../img/emotion/";
@@ -99,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc;
-      }, 3000);
+      }, 7500);
         }
         else if(happy_count%3==1){
           newSrc = getEmotionImagePath(happy_count, 'happy');
@@ -108,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc; 
-        }, 1000);
+        }, 3500);
         }
         else{
           newSrc = getEmotionImagePath(happy_count, 'happy');
@@ -118,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 500);
           setTimeout(() => {
             imageOverlay.style.display= 'none';
-          }, 3000);
+          }, 7500);
         }
         happy_count++;
         break;
@@ -130,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc;
-      }, 3000);
+      }, 7500);
         }
         else if(sad_count%3==1){
           newSrc = getEmotionImagePath(sad_count, 'sad');
@@ -139,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc; 
-      }, 3500);
+      }, 7500);
         }
         else{
           newSrc=getEmotionImagePath(sad_count, 'sad');
@@ -149,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageOverlay.style.display= 'none';
-      }, 3500);
+      }, 7500);
         }
         sad_count++;
         break;
@@ -161,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc; 
-      }, 3500);
+      }, 7500);
         }
         else{
         setTimeout(() => {
@@ -170,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageOverlay.style.display= 'none';
-        }, 3500);
+        }, 7500);
         newSrc = '../img/emotion/mad_01.GIF';
         }
         mad_count++;
@@ -182,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc;
-      }, 3000);
+      }, 7500);
         break;
       default:
         newSrc = originalSrc;
@@ -192,21 +200,33 @@ document.addEventListener('DOMContentLoaded', () => {
   //웹소켓 관련
   //===========================//
 
-  //웹소켓 연결
-  socket.addEventListener("open", () => {
-    console.log("WebSocket is open");
-  });
+  // //웹소켓 연결
+  // socket.addEventListener("open", () => {
+  //   console.log("WebSocket is open");
+  // });
 
-  //서버로부터 메세지 수신
-  socket.addEventListener("message", (event) => {
-    console.log("Message from server:", event.data);
-  });
+  // //서버로부터 메세지 수신
+  // socket.addEventListener("message", (event) => {
+  //   console.log("Message from server:", event.data);
+  // });
 
-
+  test_button.addEventListener('click',test);
   var count = 0;
-  count++;
-  changeImage(emotion);
-  if(count%PHASE_DEPTH ==0){
-    showNextBackground();
+  function test(){
+    count++;
+    emotion = 'sad';
+    changeImage(emotion);
+    if(count%PHASE_DEPTH ==0){
+      showNextBackground();
+    }
+    updateProgressBar(count);
   }
+
+  function updateProgressBar(count) {
+    var percentage = count%PHASE_DEPTH; 
+    var bar_width = (percentage*100)/PHASE_DEPTH
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.style.width = `${bar_width}%`;
+  }
+
 });

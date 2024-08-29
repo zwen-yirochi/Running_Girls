@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // 수치 설정
   const PHASE_DEPTH=4;
+  const EFFECT_REMINING_TIME = 6500;
 
   // 초기 설정
   const images = document.querySelectorAll('.item img'); //음성인식에 성공했을때 바꿀이미지
@@ -36,7 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 배경 이미지와 투명도 설정
     back.style.backgroundImage = `url('${imageUrl}')`;
     back.style.transition = "opacity 1s ease";  // 트랜지션 설정
-    back.style.opacity = 0.7;
+    back.style.opacity = 0.8;
+    document.getElementById('ground').style.display = 'block';
 
     // 클릭 이벤트 리스너 제거
     speechButton.removeEventListener('click', initialize);
@@ -177,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc;
-      }, 7500);
+      }, EFFECT_REMINING_TIME);
         }
         else if(happy_count%3==1){
           newSrc = getEmotionImagePath(happy_count, 'happy');
@@ -196,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 500);
           setTimeout(() => {
             imageOverlay.style.display= 'none';
-          }, 7500);
+          }, EFFECT_REMINING_TIME);
         }
         happy_count++;
         break;
@@ -208,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc;
-      }, 7500);
+      }, EFFECT_REMINING_TIME);
         }
         else if(sad_count%3==1){
           newSrc = getEmotionImagePath(sad_count, 'sad');
@@ -227,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageOverlay.style.display= 'none';
-      }, 7500);
+      }, EFFECT_REMINING_TIME);
         }
         sad_count++;
         break;
@@ -239,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc; 
-      }, 7500);
+      }, EFFECT_REMINING_TIME);
         }
         else{
           newSrc= getEmotionImagePath(mad_count, 'mad');
@@ -249,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageOverlay.style.display= 'none';
-        }, 7500);
+        }, EFFECT_REMINING_TIME);
         newSrc = '../img/emotion/mad_01.GIF';
         }
         mad_count++;
@@ -261,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
         setTimeout(() => {
           imageElement.src = originalSrc;
-      }, 7500);
+      }, EFFECT_REMINING_TIME);
         break;
       default:
         newSrc = originalSrc;
