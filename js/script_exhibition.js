@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   // 수치 설정
-  const PHASE_DEPTH=4;
+  const PHASE_DEPTH=10;
 
   // 초기 설정
   const test_button = document.getElementById('test_button');
-
+  const progressBar = document.getElementById('progress-bar');
+  const triangle = document.getElementById('triangle');
+  const mini = document.getElementById('mini');
 
   const imageElement = document.getElementById('emotion-image');
   const imageOverlay= document.getElementById('overlay-image');
@@ -63,16 +65,26 @@ document.addEventListener('DOMContentLoaded', () => {
       // 현재 Phase를 설정하고 배경 이미지 업데이트
       back.style.backgroundImage = "url('" + imageUrlPart + currentPhase + ".jpeg')";
       
+
+      if (currentPhase === 4) {
+        progressBar.classList.add('inverted');
+        triangle.classList.add('inverted');
+      } else {
+        progressBar.classList.remove('inverted');
+        triangle.classList.remove('inverted');
+      }
+      // 새로운 배경 이미지가 적용된 후 페이드 인
+      back.style.opacity = 0.7;
+    
+
       // Phase가 5일 때 오버레이 이미지 표시
       if (currentPhase === 5) {
         imageOverlay2.src = '../img/나비_투명.GIF'; // 오버레이 이미지 설정
-        imageOverlay2.style.display = 'block'; // 오버레이 이미지 표시
+        imageOverlay2.style.display = 'block';
+        currentPhase =0;
       } else {
         imageOverlay2.style.display = 'none'; // 오버레이 이미지 숨기기
       }
-  
-      // 새로운 배경 이미지가 적용된 후 페이드 인
-      back.style.opacity = 0.7;
     },1000);
   }
 
@@ -210,12 +222,12 @@ document.addEventListener('DOMContentLoaded', () => {
   //   console.log("Message from server:", event.data);
   // });
 
-  test_button.addEventListener('click',test);
+  //test_button.addEventListener('click',test);
   var count = 0;
   function test(){
     count++;
     emotion = 'sad';
-    changeImage(emotion);
+    // changeImage(emotion);
     if(count%PHASE_DEPTH ==0){
       showNextBackground();
     }
@@ -223,10 +235,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateProgressBar(count) {
-    var percentage = count%PHASE_DEPTH; 
-    var bar_width = (percentage*100)/PHASE_DEPTH
-    const progressBar = document.getElementById('progress-bar');
+    var progressPercentage = count%PHASE_DEPTH; 
+    var bar_width = ((progressPercentage*90)/PHASE_DEPTH) +5;
     progressBar.style.width = `${bar_width}%`;
+    triangle.style.left = `${bar_width}%`;
+    mini.style.left = `${bar_width - 10}%`;
   }
 
+  setInterval(test, 2000);
 });
