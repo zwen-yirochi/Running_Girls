@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="css/style_scan.css">
+    <title>Running Girls</title>
+    <script>
+        function adjustViewport() {
+            const viewportHeight = window.innerHeight;
+            document.documentElement.style.setProperty('--vh', `${viewportHeight * 0.01}px`);
+        }
+
+        function adjustSafeArea() {
+            const topPadding = window.visualViewport.offsetTop || 0;
+            const bottomPadding = window.visualViewport.height - window.innerHeight;
+            document.documentElement.style.setProperty('--safe-top', `${topPadding}px`);
+            document.documentElement.style.setProperty('--safe-bottom', `${bottomPadding}px`);
+        }
+
+        adjustViewport();
+        adjustSafeArea();
+
+        window.addEventListener('resize', () => {
+            adjustViewport();
+            adjustSafeArea();
+        });
+
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/script_scan.js" defer></script>
+</head>
+
+<body>
+    <div id="back"></div>
+    <img src="img/ground.gif" alt="Overlay Image" id="ground">
+    <div class="container">
+        <div class="header">
+            <div class="main_title">
+                <p>Running Girls</p>
+            </div>
+        </div>
+
+        <!--IMAGE-->
+        <div class="item">
+            <div class="article">
+                <div class="init">
+                    <p>
+                        이 작품은 관람자의 참여로 완성되는<br>
+                        반응형 전시입니다.<br>
+                        최상의 전시 경험을 위해 마이크 접근 권한과<br>
+                        사운드 재생 권한을 허용해 주세요.<br><br>
+                        This work is a reactive exhibition<br>
+                        completed with the participation of viewers.<br>
+                        Please allow microphone and soun access.<br>
+                        for your best viewing experience.
+                    </p>
+                    <p>
+                        여러분의 감정을 담아 전해 주며<br>
+                        주인공 환희와 함께 달려주세요!<br><br>
+                        Tell us about your feelings watching<br>
+                        the main charactor, Hwanhee run!
+                    </p>
+                </div>
+                <div class="slider-container un_init">
+                    <div class="slider-track">
+                        <div class="slide">
+                            <p>
+                                기쁜 감정을 환희와 나눠보세요.<br>
+                                마이크에 happy 라고 말하거나 <br>
+                                직접 happy 라고 메세지를 보내보세요!
+                            </p>
+                        </div>
+                        <div class="slide">
+                            <p>
+                                환희의 슬픈 감정을 느껴보세요.<br>
+                                마이크에 sad 라고 말하거나 <br>
+                                직접 sad 라고 메세지를 보내보세요.
+                            </p>
+                        </div>
+                        <div class="slide">
+                            <p>
+                                환희가 분노를 표현합니다.<br>
+                                마이크에 mad 라고 말하거나<br>
+                                직접 mad 라고 메세지를 보내보세요.
+                            </p>
+                        </div>
+                        <div class="slide">
+                            <p>
+                                환희를 응원해주세요!<br>
+                                마이크에 cheer 라고 말하거나 <br>
+                                직접 cheer 라고 메세지를 보내주세요!
+                            </p>
+                        </div>
+                        <div class="slide">
+                            <p>
+                                환희와의 상호작용이 모이게 되면 <br>
+                                환희는 다른 공간으로 이동합니다. <br>
+                                자유롭게 환희와 상호작용 해주세요. <br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <button class="prev-button un_init">←</button>
+
+                <!-- 다음 버튼 -->
+                <button class="next-button un_init">→</button>
+                <div class="dots-container un_init">
+                    <!-- 네비게이션 점은 JavaScript로 생성 -->
+                </div>
+
+            </div>
+        </div>
+
+        <!--FOOTER-->
+        <div class="footer">
+            <div class="speech-button">
+                <button id="speech-button">
+                    <p class="init">RUN!</p>
+                    <img class="un_init" id="microphone_icon" src="img/microphone_105844.png">
+                </button>
+            </div>
+            <div id="input-container">
+                <div class="text-box un_init">
+                    <input type="text" id="input-field" id="messageInput" placeholder="Write a comment..." />
+                </div>
+                <div class="send un_init">
+                    <button id="sendButton"><img src="../img/icons8_send.png"></button>
+                </div>
+            </div>
+            <script></script>
+        </div>
+    </div>
+</body>
+
+</html>

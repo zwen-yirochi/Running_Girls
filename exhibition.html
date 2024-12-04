@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">
@@ -8,22 +9,23 @@
   <title>Running Girls</title>
   <script>
     function setScreenSize() {
-      let vh = window.innerHeight * 0.01; //window.innerHeight: 현재 창의 뷰포트 높이를 픽셀 단위로 가져옵니다. vh 변수: vh는 뷰포트 높이의 1%를 계산하여 픽셀 값으로 저장합니다.
-      document.documentElement.style.setProperty('--vh', `${vh}px`); //CSS의 :root에 --vh라는 변수를 정의하고, 이를 계산된 vh 값으로 설정합니다.
-      // 처음 로드할 때 한 번 실행
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
       setScreenSize();
-      window.addEventListener('resize', setScreenSize); // 화면 크기 변경 시마다 실행
+      window.addEventListener('resize', setScreenSize);
     }
   </script>
+  <script src="/socket.io/socket.io.js"></script>
   <script src="js/script_exhibition.js" defer></script>
 </head>
+
 <body>
   <div id="back"></div>
-  <img src="img/ground.gif" alt="Overlay Image" id="ground">
+  <div id="ground"></div>
   <div class="container">
     <div class="header">
       <div class="main_title">
-        <p>Running <br>Girls</p>
+        <p id="title">Running Girls</p>
       </div>
     </div>
     <!--IMAGE-->
@@ -31,27 +33,28 @@
       <div class="content">
         <div class="un_init">
           <img id="emotion-image" src="img/!!런닝걸즈기본투명.GIF" alt="Image01" class="active">
-          <img src="img/overlay.png" alt="Overlay Image" id="overlay-image" class='overlay-image'>
-          <img src="img/overlay.png" alt="Overlay Image2" id="overlay-image2" class='overlay-image'>
+          <img src="../img/overlay.png" alt="Overlay Image" id="overlay-image" class='overlay-image'>
+          <img src="../img/overlay.png" alt="Overlay Image2" id="overlay-image2" class='overlay-image'>
+          <img src="../img/running girls bg eyes.gif" alt="Overlay Image3" id="overlay-image3" class='overlay-image'>
         </div>
       </div>
     </div>
 
     <!--FOOTER-->
-    <div class ="footer">
-        <div class="qr_container">
-            <!--<img src="img/qrcode_123797974_5c021995c32b815a338755b3225ca187.png">-->
-            <p>Comming Soon!<br>09.05 ~ 09.10</p>
-        </div>
-        <div class="progress-container">
-          <div class="progress-bar" id="progress-bar"></div>
-          <div class="triangle" id="triangle"></div>
-          <img src="img/mini hh.gif" id="mini">
-        </div>
-        <div>
-          <!--<button id="test_button">test_button</button>-->
-        </div>
+    <div class="footer">
+      <div class="qr_container">
+        <img src="img/qrcode_.png" id="qr_image">
+        <!--<p>Comming Soon!<br>09.05 ~ 09.10</p>-->
+      </div>
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+        <div class="triangle" id="triangle"></div>
+        <img src="img/mini hh.gif" id="mini">
+      </div>
     </div>
   </div>
 </body>
+<script>
+</script>
+
 </html>
